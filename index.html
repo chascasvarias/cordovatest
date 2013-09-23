@@ -21,7 +21,7 @@
     <head>
         <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-                <title>SBCERA</title>
+                <title>Pronamic</title>
                 <link rel="stylesheet"  href="css/jquery.mobile.structure-1.3.2.css">
                     <link rel="stylesheet"  href="css/index.css">
                       <link rel="stylesheet"  href="css/SBCERA-Theme-A.css">
@@ -29,29 +29,6 @@
                         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
                             <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
                             <script type="text/javascript" src="js/jquery.mobile-1.3.2.js"></script>
-                            <script type="text/javascript" src="cordova.js"></script>
-                            
-                            <script type="text/javascript" src="js/index.js"></script>
-                            <script type="text/javascript">
-                                app.initialize();
-                                </script>
-                            <script>
-                                $( document ).on( "pageinit", "#demo-page", function() {
-                                                 
-                                                 $( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
-                                                                  // We check if there is no open panel on the page because otherwise
-                                                                  // a swipe to close the left panel would also open the right panel (and v.v.).
-                                                                  // We do this by checking the data that the framework stores on the page element (panel: open).
-                                                                  if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
-                                                                  if ( e.type === "swipeleft"  ) {
-                                                                  $( "#right-panel" ).panel( "open" );
-                                                                  } else if ( e.type === "swiperight" ) {
-                                                                  $( "#left-panel" ).panel( "open" );
-                                                                  }
-                                                                  }
-                                                                  });
-                                                 });
-                                </script>
                             <style>
                                 /* Swipe works with mouse as well but often causes text selection. */
                                 #demo-page * {
@@ -85,7 +62,7 @@
         <div data-role="page" id="demo-page" data-theme="a">
             
             <div data-role="header" data-theme="a">
-                <h1>SBCERA</h1>
+                <h1>Pronamic Test</h1>
                 <a href="#left-panel" data-theme="a" data-icon="list-ul" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
                 <a href="#right-panel" data-theme="a" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
             </div><!-- /header -->
@@ -93,11 +70,20 @@
             <div data-role="content">
                 
                 <div>
-                    <a href="#" onclick="window.open('http://www.sbcera.org/m.meetings.html','_blank','location=yes','closebuttoncaption=Return');" data-theme="a" data-role="button" data-icon="calendar" data-iconpos="top" class="ui-icon-nodisc"><br>Meetings</a>
-                    
-                    
+                    <a href="#" onclick="$('#dispositivo').html('dispositivo:'+device.uuid+'<br>');" data-theme="a" data-role="button" class="ui-icon-nodisc">Dispositivo</a>
+                    <!-- window.open('http://pronamic.net','_blank','location=yes','closebuttoncaption=Return'); -->                    
                 </div>
-                
+                <div id="dispositivo">dispositivo:
+                </div>
+                <div>
+                    <a href="#" onclick="$('#datos').load('http://pronamic.net/procms/Apps/ProCAE/1.0/app/phonegaptest/datos.pro')" data-theme="a" data-role="button" class="ui-icon-nodisc">Obtener Datos</a>
+                    <!-- window.open('http://pronamic.net','_blank','location=yes','closebuttoncaption=Return'); -->                    
+                </div>
+                <div id="datos">datos:
+                </div>
+               <div><a href="#" data-theme="a" data-role="button" class="ui-icon-nodisc" id="scan">SCAN</a></div>
+                <!--<div><a href="#" class="topcoat-button" id="encode">ENCODE</a></div>-->
+                <div id="info"></div>
                 
             </div><!-- /content -->
             
@@ -117,6 +103,29 @@
             
         </div><!-- /page -->
         
+                            <script type="text/javascript" src="cordova.js"></script>
+							<script src="barcodescanner.js"></script>                            
+                            <script type="text/javascript" src="js/index.js"></script>
+                            <script type="text/javascript">
+                                app.initialize();
+                                </script>
+                            <script>
+                                $( document ).on( "pageinit", "#demo-page", function() {
+                                                 
+                                                 $( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
+                                                                  // We check if there is no open panel on the page because otherwise
+                                                                  // a swipe to close the left panel would also open the right panel (and v.v.).
+                                                                  // We do this by checking the data that the framework stores on the page element (panel: open).
+                                                                  if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+                                                                  if ( e.type === "swipeleft"  ) {
+                                                                  $( "#right-panel" ).panel( "open" );
+                                                                  } else if ( e.type === "swiperight" ) {
+                                                                  $( "#left-panel" ).panel( "open" );
+                                                                  }
+                                                                  }
+                                                                  });
+                                                 });
+                                </script>
         
     </body>
 </html>
