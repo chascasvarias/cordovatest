@@ -60,7 +60,7 @@ var app = {
             "Result: " + result.text + "\n" + 
             "Format: " + result.format + "\n" + 
             "Cancelled: " + result.cancelled);  */
-		   $("#myiframe").attr("src")="http://pronamic.net/procms/Apps/ProCAE/1.0/VerObj_app.pro?id=" + result.text + "&ids=" + window.localStorage.getItem("IdS") + "&idu=" + window.localStorage.getItem("IdU") + "&ip=" + device.uuid + "";
+		   document.getElementById("proframe").src="http://pronamic.net/procms/Apps/ProCAE/1.0/VerObj_app.pro?id=" + result.text + "&ids=" + window.localStorage.getItem("IdS") + "&idu=" + window.localStorage.getItem("IdU") + "&ip=" + device.uuid + "";
            /*console.log("Scanner result: \n" +
                 "text: " + result.text + "\n" +
                 "format: " + result.format + "\n" +
