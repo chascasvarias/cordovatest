@@ -11,5 +11,6 @@
     <access origin="*" />
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
+	<preference name="orientation" value="landscape" />	
 	<gap:plugin name="com.phonegap.plugins.barcodescanner" />	
 </widget>
