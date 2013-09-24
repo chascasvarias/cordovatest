@@ -90,8 +90,8 @@
             
             <div data-role="header" data-theme="a">
                 <h1>Pronamic Test</h1>
-                <a href="#left-panel" data-theme="a" data-icon="list-ul" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
-                <a href="#right-panel" data-theme="a" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
+                <a href="#left-panel" data-theme="a" data-icon="grid" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+             <!--   <a href="#right-panel" data-theme="a" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>-->
             </div><!-- /header -->
             
             <div data-role="content" style="margin:0px;padding: 0px;">
@@ -112,7 +112,7 @@
                 <!--<div><a href="#" class="topcoat-button" id="encode">ENCODE</a></div>-->
                 <div id="info"></div>
                <div><a href="#" data-theme="a" data-role="button" class="ui-icon-nodisc" id="btnWeb">Web</a></div>
-               <div><a href="#" data-theme="a" data-role="button" class="ui-icon-nodisc" id="btnWeb2">Web2</a></div>
+               <!--<div><a href="#" data-theme="a" data-role="button" class="ui-icon-nodisc" id="btnWeb2">Web2</a></div>-->
               </div>
               <div id="contenido2"></div>
             </div><!-- /content -->
@@ -213,7 +213,7 @@ $(document).ready(function(){
 	});
 	$("#btnWeb").click(function(){
 				$("#contenido1").hide();
-				$('<iframe src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="100%" frameborder="0" ></iframe>').appendTo('#contenido2');
+				$('<iframe id="myiframe" src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="100%" frameborder="0" ></iframe>').appendTo('#contenido2');
 	});
 	$("#btnWeb2").click(function(){
 		window.open('http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid ,'_self','location=no','closebuttoncaption=Return');

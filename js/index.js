@@ -55,12 +55,12 @@ var app = {
         var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
         scanner.scan( function (result) { 
-
-            alert("We got a barcode\n" + 
+			
+            /*alert("We got a barcode\n" + 
             "Result: " + result.text + "\n" + 
             "Format: " + result.format + "\n" + 
-            "Cancelled: " + result.cancelled);  
-
+            "Cancelled: " + result.cancelled);  */
+		   $("#myiframe").attr("src")="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=" + window.localStorage.getItem("IdS") + "&idu=" + window.localStorage.getItem("IdU") + "&ip=" + device.uuid + "";
            console.log("Scanner result: \n" +
                 "text: " + result.text + "\n" +
                 "format: " + result.format + "\n" +
