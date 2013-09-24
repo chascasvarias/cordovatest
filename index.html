@@ -57,7 +57,35 @@
     </head>
     <body>
         
-        
+   <section id="login" data-role="page">
+        <header data-role="header">
+            <h1>Pronamic Test</h1>
+        </header>
+        <article data-role="content">
+            <form id="form_login">
+                <div data-role="fieldcontain" class="ui-hide-label">
+                    <label for="txtuser">Usuario:</label>
+                    <input type="text" name="txtuser" id="txtuser" value="" placeholder="Name" />
+                </div>
+                <div data-role="fieldcontain" class="ui-hide-label">
+                    <label for="txtpassword">Contraseña:</label>
+                    <input type="password" name="txtpassword" id="txtpassword" value="" placeholder="Password" />
+                </div>
+                <input type="button" value="Entrar" id="btnLogin">
+            </form>
+             <!--<div id="errorMsg" style="background-color:red;color: #FFFFFF;">Usuario o Contraseña no valida</div>-->
+        </article>
+    </section>
+    <!-- Aqui nuestro dialog con el mensaje de error  -->
+    <section id="pageError" data-role="dialog">
+        <header data-role="header">
+            <h1>Error</h1>
+        </header>
+        <article data-role="content">
+            <p>Usuario o contraseña no valida</p>
+            <a href="#" data-role="button" data-rel="back">Aceptar</a>
+        </article>
+    </section>        
         
         <div data-role="page" id="demo-page" data-theme="a">
             
@@ -67,11 +95,11 @@
                 <a href="#right-panel" data-theme="a" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>
             </div><!-- /header -->
             
-            <div data-role="content">
-                
+            <div data-role="content" style="margin:0px;padding: 0px;">
+               <div id="contenido1">
                 <div>
                     <a href="#" onclick="$('#dispositivo').html('dispositivo:'+device.uuid+'<br>');" data-theme="a" data-role="button" class="ui-icon-nodisc">Dispositivo</a>
-                    <!-- window.open('http://pronamic.net','_blank','location=yes','closebuttoncaption=Return'); -->                    
+                    <!--  window.open('http://pronamic.net','_blank','location=yes','closebuttoncaption=Return'); -->                    
                 </div>
                 <div id="dispositivo">dispositivo:
                 </div>
@@ -84,7 +112,10 @@
                <div><a href="#" data-theme="a" data-role="button" class="ui-icon-nodisc" id="scan">SCAN</a></div>
                 <!--<div><a href="#" class="topcoat-button" id="encode">ENCODE</a></div>-->
                 <div id="info"></div>
-                
+               <div><a href="#" data-theme="a" data-role="button" class="ui-icon-nodisc" id="btnWeb">Web</a></div>
+               <div><a href="#" data-theme="a" data-role="button" class="ui-icon-nodisc" id="btnWeb2">Web2</a></div>
+              </div>
+              <div id="contenido2"></div>
             </div><!-- /content -->
             
             <div data-role="panel" id="left-panel"  data-display="overlay" data-theme="a">
@@ -103,29 +134,95 @@
             
         </div><!-- /page -->
         
-                            <script type="text/javascript" src="cordova.js"></script>
-							<script src="barcodescanner.js"></script>                            
-                            <script type="text/javascript" src="js/index.js"></script>
-                            <script type="text/javascript">
-                                app.initialize();
-                                </script>
-                            <script>
-                                $( document ).on( "pageinit", "#demo-page", function() {
-                                                 
-                                                 $( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
-                                                                  // We check if there is no open panel on the page because otherwise
-                                                                  // a swipe to close the left panel would also open the right panel (and v.v.).
-                                                                  // We do this by checking the data that the framework stores on the page element (panel: open).
-                                                                  if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
-                                                                  if ( e.type === "swipeleft"  ) {
-                                                                  $( "#right-panel" ).panel( "open" );
-                                                                  } else if ( e.type === "swiperight" ) {
-                                                                  $( "#left-panel" ).panel( "open" );
-                                                                  }
-                                                                  }
-                                                                  });
-                                                 });
-                                </script>
-        
+<script type="text/javascript" src="cordova.js"></script>
+<script src="barcodescanner.js"></script>                 
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+	app.initialize();
+	</script>
+<script>
+$( document ).on( "pageinit", "#demo-page", function() {
+ 
+ $( document ).on( "swipeleft swiperight", "#demo-page", function( e ) {
+	  // We check if there is no open panel on the page because otherwise
+	  // a swipe to close the left panel would also open the right panel (and v.v.).
+	  // We do this by checking the data that the framework stores on the page element (panel: open).
+	  if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+	  if ( e.type === "swipeleft"  ) {
+	  $( "#right-panel" ).panel( "open" );
+	  } else if ( e.type === "swiperight" ) {
+	  $( "#left-panel" ).panel( "open" );
+	  }
+	  }
+	  });
+ });
+
+/*$(document).ready(function(e){
+	$("#traer").click(function(){
+		$("#datos").load("http://pronamic.net/procms/Apps/ProCAE/1.0/app/phonegaptest/datos.pro");
+	});		
+});*/
+/*$('#intro').click(function() {
+$('.api-div').hide();
+$('.api-div#api-intro').show();
+$.mobile.silentScroll(0);            
+});*/
+var IdU; 
+var IdS; 
+$(document).ready(function(){
+	$("#errorMsg").hide();
+	
+	IdU = window.localStorage.getItem("IdU");
+	IdS = window.localStorage.getItem("IdS");
+	if (IdU!="" && IdS!="" )
+	{
+		$.post("http://pronamic.net/procms/chk_session_app.pro",{ idu : IdU, ids : IdS, ip: device.uuid},function(respuesta){
+			if (respuesta == "1") {
+				$.mobile.changePage("#demo-page");
+			}
+			else{
+				window.localStorage.setItem("IdU", "");
+				window.localStorage.setItem("IdS", "");
+				IdU="";
+				IdS="";
+			}
+		});		
+	}
+
+	$("#btnLogin").click(function(){
+		var usu = $("#txtuser").val();
+		var pass = $("#txtpassword").val();
+		$.post("http://pronamic.net/procms/entrar_app.pro",{ user : usu, clave : pass, ip: device.uuid},function(respuesta){
+							//$.mobile.changePage("#demo-page");
+			if (respuesta != "0") {
+				IdU=respuesta.substring(22);
+				IdS=respuesta.substring(0,22);
+				window.localStorage.setItem("IdU",IdU);
+				window.localStorage.setItem("IdS",IdS);
+				$("#info").html("IdU:"+IdU+"<br />IdS:"+IdS+"<br />IP:"+device.uuid);
+				$.mobile.changePage("#demo-page");
+			}
+			else{
+				window.localStorage.setItem("IdU", "");
+				window.localStorage.setItem("IdS", "");
+				IdU="";
+				IdS="";
+				$.mobile.changePage('#pageError', 'pop', true, true);
+				
+			}
+		});
+	});
+	$("#btnWeb").click(function(){
+				$("#contenido1").hide();
+				$('<iframe src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="' + (screen.height-44) + 'px" width="' + screen.width + 'px" frameborder="0" scrolling="no" ></iframe>').appendTo('#contenido2');
+	});
+	$("#btnWeb2").click(function(){
+		window.open('http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid ,'_self','location=no','closebuttoncaption=Return');
+	});
+});
+
+
+					 
+	</script>
     </body>
 </html>
