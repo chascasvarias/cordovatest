@@ -120,16 +120,14 @@
             <div data-role="panel" id="left-panel"  data-display="overlay" data-theme="a">
                 
                 <p>Opciones</p>
-                <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
+                <p><a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="right">Volver</a></p>
+                <p><a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="star" id="scan" data-iconpos="right">QR</a></p>
+                <p><a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right" onclick="app.exitApp();">Salir</a></p>
                 
             </div><!-- /panel -->
             
-            <div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="a">
+            <!--<div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="a">-->
                 
-                <p>Opciones</p>
-                <p><a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="right">Volver</a></p>
-                <p><a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="star" id="scan" data-iconpos="right">QR</a></p>
-                <p><a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right" onclick="app.exitApp();">Salir</a></p>
                 
             </div><!-- /panel -->
             
@@ -215,7 +213,7 @@ $(document).ready(function(){
 	});
 	$("#btnWeb").click(function(){
 				$("#contenido1").hide();
-				$('<iframe src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="' + (screen.height-44) + 'px" width="' + screen.width + 'px" frameborder="0" scrolling="no" ></iframe>').appendTo('#contenido2');
+				$('<iframe src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="1000px" width="100%" frameborder="0" ></iframe>').appendTo('#contenido2');
 	});
 	$("#btnWeb2").click(function(){
 		window.open('http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid ,'_self','location=no','closebuttoncaption=Return');
