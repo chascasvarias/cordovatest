@@ -213,7 +213,7 @@ $(document).ready(function(){
 	});
 	$("#btnWeb").click(function(){
 				$("#contenido1").hide();
-				$('<iframe src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="1000px" width="100%" frameborder="0" ></iframe>').appendTo('#contenido2');
+				$('<iframe src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="100%" frameborder="0" ></iframe>').appendTo('#contenido2');
 	});
 	$("#btnWeb2").click(function(){
 		window.open('http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid ,'_self','location=no','closebuttoncaption=Return');
