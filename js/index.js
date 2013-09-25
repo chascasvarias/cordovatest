@@ -26,8 +26,37 @@ var app = {
     // Bind any events that are required on startup. Common events are:
     // 'load', 'deviceready', 'offline', and 'online'.
     bindEvents: function() {
+		
+		var url="http://pronamic.net";
         document.addEventListener('deviceready', this.onDeviceReady, false);
         document.getElementById('scan').addEventListener('click', this.scan, false);
+
+		window.addEventListener("message", function(event) {
+			  var iframe = document.getElementById('proframe');			
+			  if (event.origin == url) {
+				if (event.data == "camera") {
+				  navigator.camera.getPicture(function(imageData) {
+					iframe.contentWindow.postMessage({
+					  image: imageData
+					}, url);
+				  }, function(message) {
+					iframe.contentWindow.postMessage({
+					  error: message
+					}, url);
+				  }, {
+					quality: 50,
+					destinationType: 0,
+					targetWidth: 600,
+					targetHeight: 600
+				  });
+				}
+				if (event.data.test) {
+					eval(event.data.test);
+				}
+				
+			  }
+	    }, false);
+	
         //document.getElementById('encode').addEventListener('click', this.encode, false);
     },
     // deviceready Event Handler
