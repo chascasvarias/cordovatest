@@ -1,22 +1,4 @@
 <!DOCTYPE html>
-<!--
- Licensed to the Apache Software Foundation (ASF) under one
- or more contributor license agreements.  See the NOTICE file
- distributed with this work for additional information
- regarding copyright ownership.  The ASF licenses this file
- to you under the Apache License, Version 2.0 (the
- "License"); you may not use this file except in compliance
- with the License.  You may obtain a copy of the License at
- 
- http://www.apache.org/licenses/LICENSE-2.0
- 
- Unless required by applicable law or agreed to in writing,
- software distributed under the License is distributed on an
- "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- KIND, either express or implied.  See the License for the
- specific language governing permissions and limitations
- under the License.
- -->
 <html>
     <head>
         <meta charset="utf-8">
@@ -55,6 +37,15 @@
                                 </style>
     </head>
     <body>
+
+   <section id="intro" data-role="page">
+        <header data-role="header">
+            <h1>HSO CAE</h1>
+        </header>
+        <article data-role="content">
+        	<div style="width:100%; margin-top:20px"><img src="logo.png" width="50%" style="margin:auto; display:block " onClick="$.mobile.changePage('#login');" /></div>
+        </article>
+    </section>
         
    <section id="login" data-role="page">
         <header data-role="header">
@@ -82,15 +73,16 @@
         </header>
         <article data-role="content">
             <p>Usuario o contraseña no valida</p>
-            <a href="#" data-role="button" data-rel="back">Aceptar</a>
+            <a href="#" data-role="button" id="btnError">Aceptar</a>
         </article>
     </section>        
         
         <div data-role="page" id="demo-page" data-theme="a">
             
-            <div data-role="header" data-theme="a">
+            <div data-role="header" data-theme="a">            	
                 <h1>Pronamic Test</h1>
-                <a href="#left-panel" data-theme="a" data-icon="grid" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open left panel</a>
+                <a href="#" id="scan" data-theme="a" data-icon="search" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">QR</a>
+                <a href="#" id="salir" onClick="navigator.app.exitApp();" data-theme="a" data-icon="delete" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Salir</a>
              <!--   <a href="#right-panel" data-theme="a" data-icon="arrow-l" data-iconpos="notext" data-shadow="false" data-iconshadow="false" class="ui-icon-nodisc">Open right panel</a>-->
             </div><!-- /header -->
             
@@ -117,14 +109,14 @@
               <div id="contenido2"></div>
             </div><!-- /content -->
             
-            <div data-role="panel" id="left-panel"  data-display="overlay" data-theme="a">
+<!--            <div data-role="panel" id="left-panel"  data-display="overlay" data-theme="a">
                 
                 <p>Opciones</p>
                 <p><a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="right">Volver</a></p>
                 <p><a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="star" id="scan" data-iconpos="right">QR</a></p>
                 <p><a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right" onclick="app.exitApp();">Salir</a></p>
                 
-            </div><!-- /panel -->
+            </div> -->
             
             <!--<div data-role="panel" id="right-panel" data-display="push" data-position="right" data-theme="a">-->
                 
@@ -166,59 +158,8 @@ $('.api-div').hide();
 $('.api-div#api-intro').show();
 $.mobile.silentScroll(0);            
 });*/
-var IdU; 
-var IdS; 
-$(document).ready(function(){
-	$("#errorMsg").hide();
-	
-	IdU = window.localStorage.getItem("IdU");
-	IdS = window.localStorage.getItem("IdS");
-	if (IdU!="" && IdS!="" )
-	{
-		$.post("http://pronamic.net/procms/chk_session_app.pro",{ idu : IdU, ids : IdS, ip: device.uuid},function(respuesta){
-			if (respuesta == "1") {
-				$.mobile.changePage("#demo-page");
-			}
-			else{
-				window.localStorage.setItem("IdU", "");
-				window.localStorage.setItem("IdS", "");
-				IdU="";
-				IdS="";
-			}
-		});		
-	}
-
-	$("#btnLogin").click(function(){
-		var usu = $("#txtuser").val();
-		var pass = $("#txtpassword").val();
-		$.post("http://pronamic.net/procms/entrar_app.pro",{ user : usu, clave : pass, ip: device.uuid},function(respuesta){
-							//$.mobile.changePage("#demo-page");
-			if (respuesta != "0") {
-				IdU=respuesta.substring(22);
-				IdS=respuesta.substring(0,22);
-				window.localStorage.setItem("IdU",IdU);
-				window.localStorage.setItem("IdS",IdS);
-				$("#info").html("IdU:"+IdU+"<br />IdS:"+IdS+"<br />IP:"+device.uuid);
-				$.mobile.changePage("#demo-page");
-			}
-			else{
-				window.localStorage.setItem("IdU", "");
-				window.localStorage.setItem("IdS", "");
-				IdU="";
-				IdS="";
-				$.mobile.changePage('#pageError', 'pop', true, true);
-				
-			}
-		});
-	});
-	$("#btnWeb").click(function(){
-				$("#contenido1").hide();
-				$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="100%" frameborder="0" ></iframe>').appendTo('#contenido2');
-	});
-	$("#btnWeb2").click(function(){
-		window.open('http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid ,'_self','location=no','closebuttoncaption=Return');
-	});
-});
+/*$(document).ready(function(){
+});*/
 
 
 					 

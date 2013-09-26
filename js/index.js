@@ -16,6 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var IdU; 
+var IdS; 
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -65,18 +68,86 @@ var app = {
     // function, we must explicity call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+		//window.localStorage.setItem("IdU", "");
+		//window.localStorage.setItem("IdS", "");
+		$("#errorMsg").hide();
+		
+		IdU = window.localStorage.getItem("IdU");
+		IdS = window.localStorage.getItem("IdS");
+		console.log("IdU:"+IdU);
+		if (IdU!="" && IdS!="" )
+		{
+			$.post("http://pronamic.net/procms/chk_session_app.pro",{ idu : IdU, ids : IdS, ip: device.uuid},function(respuesta){
+				if (respuesta == "1") {
+					console.log("autologin Ok");
+					$("#contenido1").hide();
+					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');				
+					$.mobile.changePage("#demo-page");
+				}
+				else{
+					console.log("autologin Error");
+					window.localStorage.setItem("IdU", "");
+					window.localStorage.setItem("IdS", "");
+					IdU="";				
+					IdS="";				
+					$.mobile.changePage("#login");
+				}
+			});		
+		}
+		else
+		{
+			$.mobile.changePage("#login");
+		}
+		$("#btnError").click(function(){
+			$.mobile.changePage("#login");
+		});
+		$("#btnLogin").click(function(){
+			console.log("login Click");
+			var usu = $("#txtuser").val();
+			var pass = $("#txtpassword").val();
+			$.post("http://pronamic.net/procms/entrar_app.pro",{ user : usu, clave : pass, ip: device.uuid},function(respuesta){
+								//$.mobile.changePage("#demo-page");
+				if (respuesta != "0") {
+					console.log("login Ok");
+					IdU=respuesta.substring(22);
+					IdS=respuesta.substring(0,22);
+					window.localStorage.setItem("IdU",IdU);
+					window.localStorage.setItem("IdS",IdS);
+					$("#info").html("IdU:"+IdU+"<br />IdS:"+IdS+"<br />IP:"+device.uuid);
+					$("#contenido1").hide();
+					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');
+					$.mobile.changePage("#demo-page");
+				}
+				else{
+					console.log("login Error");
+					window.localStorage.setItem("IdU", "");
+					window.localStorage.setItem("IdS", "");
+					IdU="";
+					IdS="";
+					$.mobile.changePage('#pageError', 'pop', true, true);
+					
+				}
+			});
+		});
+		/*$("#btnWeb").click(function(){
+					$("#contenido1").hide();
+					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');
+		});
+		$("#btnWeb2").click(function(){
+			window.open('http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid ,'_self','location=no','closebuttoncaption=Return');
+		});*/
 		
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
+       /* var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
 
         listeningElement.setAttribute('style', 'display:none;');
         receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+        console.log('Received Event: ' + id);*/
     },
     scan: function() {
         console.log('scanning');
