@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.cordova.hellocordova" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap = "http://phonegap.com/ns/1.0" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HSO CAE</name>
+    <name>DocuCAE</name>
     <description>
-        HSO CAE. Gestion de documentacion de PRL
+        DocuCAE. Gestion de la Documentacion para la Coordinación de Actividades Empresariales
     </description>
     <author email="info@pronamic.net" href="http://pronamic.net">
-        Apache Cordova Team
+        Pronamic Ingenieros SL
     </author>
     <content src="index.html" />
     <access origin="*" />
