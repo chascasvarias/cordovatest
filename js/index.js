@@ -81,7 +81,7 @@ var app = {
 				if (respuesta == "1") {
 					console.log("autologin Ok");
 					$("#contenido1").hide();
-					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');				
+					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/DocuCAE/1.5/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');				
 					$.mobile.changePage("#demo-page");
 				}
 				else{
@@ -115,7 +115,7 @@ var app = {
 					window.localStorage.setItem("IdS",IdS);
 					$("#info").html("IdU:"+IdU+"<br />IdS:"+IdS+"<br />IP:"+device.uuid);
 					$("#contenido1").hide();
-					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');
+					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/DocuCAE/1.5/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');
 					$.mobile.changePage("#demo-page");
 				}
 				else{
@@ -131,10 +131,10 @@ var app = {
 		});
 		/*$("#btnWeb").click(function(){
 					$("#contenido1").hide();
-					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');
+					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/DocuCAE/1.5/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');
 		});
 		$("#btnWeb2").click(function(){
-			window.open('http://pronamic.net/procms/Apps/ProCAE/1.0/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid ,'_self','location=no','closebuttoncaption=Return');
+			window.open('http://pronamic.net/procms/Apps/DocuCAE/1.5/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid ,'_self','location=no','closebuttoncaption=Return');
 		});*/
 		
     },
@@ -160,7 +160,7 @@ var app = {
             "Result: " + result.text + "\n" + 
             "Format: " + result.format + "\n" + 
             "Cancelled: " + result.cancelled);  */
-		   document.getElementById("proframe").src="http://pronamic.net/procms/Apps/ProCAE/1.0/VerObj_app.pro?id=" + result.text + "&ids=" + window.localStorage.getItem("IdS") + "&idu=" + window.localStorage.getItem("IdU") + "&ip=" + device.uuid + "";
+		   document.getElementById("proframe").src="http://pronamic.net/procms/Apps/DocuCAE/1.5/VerObj_app.pro?id=" + result.text + "&ids=" + window.localStorage.getItem("IdS") + "&idu=" + window.localStorage.getItem("IdU") + "&ip=" + device.uuid + "";
            /*console.log("Scanner result: \n" +
                 "text: " + result.text + "\n" +
                 "format: " + result.format + "\n" +
