@@ -71,8 +71,8 @@ var app = {
 		//window.localStorage.setItem("IdU", "");
 		//window.localStorage.setItem("IdS", "");
 		$("#errorMsg").hide();
-		
-		IdU = window.localStorage.getItem("IdU");
+		window.location='http://pronamic.net/app/';
+		/*IdU = window.localStorage.getItem("IdU");
 		IdS = window.localStorage.getItem("IdS");
 		console.log("IdU:"+IdU);
 		if (IdU!="" && IdS!="" )
@@ -127,7 +127,8 @@ var app = {
 					$.mobile.changePage('#pageError', 'pop', true, true);
 					
 				}
-			});
+			});*/
+			
 		});
 		/*$("#btnWeb").click(function(){
 					$("#contenido1").hide();
