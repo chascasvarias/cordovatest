@@ -127,10 +127,10 @@ var app = {
 					$.mobile.changePage('#pageError', 'pop', true, true);
 					
 				}
-			});*/
+			});
 			
 		});
-		/*$("#btnWeb").click(function(){
+		$("#btnWeb").click(function(){
 					$("#contenido1").hide();
 					$('<iframe id="proframe" src="http://pronamic.net/procms/Apps/DocuCAE/1.5/admin_app.pro?ids=' + IdS + '&idu=' + IdU + '&ip=' + device.uuid +'" height="100%" width="550px" frameborder="0" style="min-height:400px" ></iframe>').appendTo('#contenido2');
 		});
