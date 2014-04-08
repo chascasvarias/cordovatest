@@ -12,6 +12,8 @@
     <preference name="fullscreen" value="true" />
     <preference name="webviewbounce" value="true" />
     <icon src="icon.png" />
-	<preference name="orientation" value="landscape" />	
+	<preference name="orientation" value="default" />	
 	<gap:plugin name="com.phonegap.plugins.barcodescanner" />	
+	<gap:plugin name="de.appplant.cordova.plugin.email-composer" version="0.8.0" />
+	<gap:plugin name="com.plugin.datepicker" version="0.3.2" />
 </widget>
